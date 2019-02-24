@@ -1,38 +1,23 @@
 <?php
 
-namespace App;
-
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Repositories\ProjectRepository;
-use App\Repositories\TaskRepository;
-use App\Repositories\RoleRepository;
-use App\Repositories\PermissionRepository;
+namespace App\Repositories;
 
 
-
-class User extends Authenticatable
+class UserRepository extends AbstractRepository
 {
-    use Notifiable;
-
     /**
-     * The attributes that are mass assignable.
+     * The table associated with the model.
      *
-     * @var array
+     * @var string
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    public $table = 'users';
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    protected $guarded = [];
+
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'created_at', 'updated_at', 'email_verified_at'
     ];
+
 
     /**
      * The project that belong to the user.
@@ -47,7 +32,7 @@ class User extends Authenticatable
      */
     public function task()
     {
-        return $this->hasMany(TaskRepository::class);
+        return $this->hasMany(TasksRepository::class);
     }
 
     /**
