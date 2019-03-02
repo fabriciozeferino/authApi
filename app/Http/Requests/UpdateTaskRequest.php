@@ -24,6 +24,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules()
     {
+
         $rules = [
             'project_id' => 'required|integer',
             'task_id' => 'required|integer',
